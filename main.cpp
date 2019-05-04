@@ -16,58 +16,105 @@
 #include "coloredout.h"
 #include "catch_config.h"
 
-TEST_CASE("testRotateLeft")
-{
+using namespace std;
+
+void printHeader(const string &headline) {
+    cout << string(64, colored_out::BORDER_CHAR) << endl;
+    colored_out::output_bold(headline);
+    cout << endl << string(64, colored_out::BORDER_CHAR) << endl;
+}
+
+void printBefore() {
+    cout << "~";
+    colored_out::output_bold("Before");
+    cout << "~" << endl;
+}
+
+void printAfter(int inserted) {
+    cout << endl << "~";
+    colored_out::output_bold("After insert(");
+    colored_out::output_bold(inserted);
+    colored_out::output_bold(")");
+    cout << "~" << endl;
+}
+
+void printEnd() {
+    cout << endl << endl;
+}
+
+
+TEST_CASE("testRotateLeft") {
     AVLTree<int, int> tree;
     vector<int> expected({0, 6, 4, 7, 2, 5, 0, 9, 0});
+    printHeader("Left Rotation");
     tree.insert(4, 4);
     tree.insert(6, 6);
     tree.insert(2, 2);
     tree.insert(7, 7);
     tree.insert(5, 5);
+    printBefore();
+    tree.print();
+    printAfter(9);
     tree.insert(9, 9);
     REQUIRE(expected == tree.heap());
+    tree.print();
+    printEnd();
 }
 
-TEST_CASE("testRotateRight")
-{
+TEST_CASE("testRotateRight") {
     AVLTree<int, int> tree;
     vector<int> expected({0, 3, 0, 6, 0, 0, 5, 8, 0});
+    printHeader("Right Rotation");
     tree.insert(3, 3);
     tree.insert(0, 0);
     tree.insert(8, 8);
     tree.insert(6, 6);
+    printBefore();
+    tree.print();
+    printAfter(5);
     tree.insert(5, 5);
     REQUIRE(expected == tree.heap());
+    tree.print();
+    printEnd();
 }
 
-TEST_CASE("testRotateLeftRight")
-{
+TEST_CASE("testRotateLeftRight") {
     AVLTree<int, int> tree;
     vector<int> expected({0, 3, 1, 5, 0, 2, 0, 8, 0});
+    printHeader("Left-Right Rotation");
     tree.insert(5, 5);
     tree.insert(1, 1);
     tree.insert(8, 8);
     tree.insert(0, 0);
     tree.insert(3, 3);
+    printBefore();
+    tree.print();
+    printAfter(2);
     tree.insert(2, 2);
     REQUIRE(expected == tree.heap());
+    tree.print();
+    printEnd();
 }
 
-TEST_CASE("testRotateRightLeft")
-{
+TEST_CASE("testRotateRightLeft") {
     AVLTree<int, int> tree;
     vector<int> expected({0, 6, 3, 8, 0});
+    printHeader("Right-Left Rotation");
     tree.insert(3, 3);
     tree.insert(8, 8);
+    printBefore();
+    tree.print();
+    printAfter(6);
     tree.insert(6, 6);
     REQUIRE(expected == tree.heap());
+    tree.print();
+    printEnd();
 }
 
-TEST_CASE("testManyInsertions")
-{
+TEST_CASE("testManyInsertions") {
     AVLTree<int, string> tree;
     vector<int> expected({0, 61, 26, 87, 17, 36, 76, 94, 3, 23, 31, 42, 73, 78, 92, 96, 1, 11, 18, 24, 0, 0, 41, 45, 71, 74, 0, 82, 0, 93, 95, 0});
+    printHeader("Testing Many Insertions");
     tree.insert(94, "data for 94");
     tree.insert(87, "data for 87");
     tree.insert(61, "data for 61");
@@ -85,22 +132,24 @@ TEST_CASE("testManyInsertions")
     tree.insert(23, "data for 23");
     tree.insert(93, "data for 93");
     tree.insert(31, "data for 31");
-    tree.insert( 3, "data for 3");
+    tree.insert(3, "data for 3");
     tree.insert(45, "data for 45");
     tree.insert(18, "data for 18");
     tree.insert(73, "data for 73");
     tree.insert(24, "data for 24");
     tree.insert(74, "data for 74");
-    tree.insert( 1, "data for 1");
+    tree.insert(1, "data for 1");
     tree.insert(71, "data for 71");
     tree.insert(82, "data for 82");
     REQUIRE(expected == tree.heap());
+    tree.print();
+    printEnd();
 }
 
-TEST_CASE("testManyRemovals")
-{
+TEST_CASE("testManyRemovals") {
     AVLTree<int, string> tree;
     vector<int> expected({0, 45, 26, 87, 17, 36, 78, 93, 3, 23, 31, 42, 74, 82, 92, 96, 1, 11, 18, 24, 0, 0, 41, 0});
+    printHeader("Testing Many Removals");
     tree.insert(94, "data for 94");
     tree.insert(87, "data for 87");
     tree.insert(61, "data for 61");
@@ -118,13 +167,13 @@ TEST_CASE("testManyRemovals")
     tree.insert(23, "data for 23");
     tree.insert(93, "data for 93");
     tree.insert(31, "data for 31");
-    tree.insert( 3, "data for 3");
+    tree.insert(3, "data for 3");
     tree.insert(45, "data for 45");
     tree.insert(18, "data for 18");
     tree.insert(73, "data for 73");
     tree.insert(24, "data for 24");
     tree.insert(74, "data for 74");
-    tree.insert( 1, "data for 1");
+    tree.insert(1, "data for 1");
     tree.insert(71, "data for 71");
     tree.insert(82, "data for 82");
     tree.remove(95);
@@ -134,4 +183,6 @@ TEST_CASE("testManyRemovals")
     tree.remove(73);
     tree.remove(71);
     REQUIRE(expected == tree.heap());
+    tree.print();
+    printEnd();
 }
