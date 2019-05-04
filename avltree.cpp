@@ -169,7 +169,7 @@ void AVLTree<K, V>::remove(Node *&subtree, const K &key) {
              */
             Node *pred = NULL;
             Node *predParent = subtree;
-            for (pred = subtree->left; !pred->right; predParent = pred, pred = pred->right);
+            for (pred = subtree->left; (pred->right)!=NULL; predParent = pred, pred = pred->right);
             if(pred!=subtree->left){
                 predParent->right = pred->left;
             }else{
