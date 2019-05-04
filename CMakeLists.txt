@@ -8,6 +8,8 @@ add_custom_target(${name} COMMAND make -C ${${name}_SOURCE_DIR}
         CLION_EXE_DIR=${PROJECT_BINARY_DIR})
 
 add_executable(lab_avl_2
+        catch.hpp
+        catch_config.h
         avltree.cpp
         avltree.h
         avltree_given.cpp
