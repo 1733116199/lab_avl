@@ -216,7 +216,7 @@ class AVLTree
     ostream* _out;
 
     /** This function is used for grading. */
-    void toHeap(Node* n, int rootIndex, vector<K>& v);
+    void toHeap(Node* n, unsigned long rootIndex, vector<K>& v);
 };
 
 #include "avltree_given.cpp"

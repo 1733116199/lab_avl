@@ -1,11 +1,2 @@
-#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
-
-int c;
-char** v;
-int main(int argc, char** argv){
-    c = argc;
-    v = argv;
-    Catch::Session session;
-    return session.run();
-}

@@ -197,11 +197,11 @@ vector<K> AVLTree<K, V>::heap(){
 }
 
 template<class K, class V>
-void AVLTree<K, V>::toHeap(AVLTree<K, V>::Node* n, int rootIndex, vector<K>& v){
+void AVLTree<K, V>::toHeap(AVLTree<K, V>::Node* n, unsigned long rootIndex, vector<K>& v){
     if(n) {
         if (v.size() < rootIndex + 2)
             v.resize(rootIndex + 2, K());
-        v[rootIndex] = root->key;
+        v[rootIndex] = n->key;
         toHeap(n->left, 2 * rootIndex, v);
         toHeap(n->right, 2 * rootIndex + 1, v);
     }
