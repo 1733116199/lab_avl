@@ -188,3 +188,21 @@ void AVLTree<K, V>::remove(Node *&subtree, const K &key) {
         rebalance(subtree);
     }
 }
+
+template<class K, class V>
+vector<K> AVLTree<K, V>::heap(){
+    vector<K> v;
+    toHeap(root, 1, v);
+    return v;
+}
+
+template<class K, class V>
+void AVLTree<K, V>::toHeap(AVLTree<K, V>::Node* n, int rootIndex, vector<K>& v){
+    if(n) {
+        if (v.size() < rootIndex + 2)
+            v.resize(rootIndex + 2, K());
+        v[rootIndex] = root->key;
+        toHeap(n->left, 2 * rootIndex, v);
+        toHeap(n->right, 2 * rootIndex + 1, v);
+    }
+}

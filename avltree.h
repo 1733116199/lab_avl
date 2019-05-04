@@ -111,6 +111,12 @@ class AVLTree
      */
     void setOutput(ostream& newOut);
 
+    /**
+     * This function is used for grading.
+     * @return A heap representation of the tree
+     */
+    vector<K> heap();
+
   private:
     /**
      * The root of the tree.
@@ -208,6 +214,9 @@ class AVLTree
 
     /** This variable is used for grading. */
     ostream* _out;
+
+    /** This function is used for grading. */
+    void toHeap(Node* n, int rootIndex, vector<K>& v);
 };
 
 #include "avltree_given.cpp"
